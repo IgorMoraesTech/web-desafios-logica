@@ -7,11 +7,21 @@ const rl = readline.createInterface({
 });
 
 rl.question('Digite um ano para verificar: ', (resposta) => {
+  const anoTexto = resposta.trim().toLowerCase();
+
   // Conversão explícita de String para Number
-  const ano = Number(resposta);
+  const ano = Number(anoTexto);
+
+  if (isNaN(ano)) {
+    console.log('Erro: Digite um ano válido usando apenas números.');
+    rl.close();
+    return;
+  }
 
   // Expressão lógica conforme especificado na aula
-  const ehBissexto = (ano % 4 === 0) && (ano % 100 !== 0 || ano % 400 === 0);
+  const ehBissexto =
+    (ano % 4 === 0) &&
+    (ano % 100 !== 0 || ano % 400 === 0);
 
   if (ehBissexto) {
     console.log(`O ano ${ano} É bissexto!`);
